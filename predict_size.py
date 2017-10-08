@@ -7,8 +7,11 @@ import math
 import tensorflow as tf
 from datetime import date,datetime
 
+#### Parameters
 learn_rate = 0.001
 samples = 100000
+mongodb_uri = 'mongodb://localhost:27017'
+mongodb_db  = "stu2017"
 
 def normalize(V) :
   return(tf.divide(tf.subtract(V, V.mean()), V.max() - V.min()))
@@ -46,9 +49,9 @@ def calc_mb(X,Y) :
 
 
 
-db_con = MongoClient('mongodb://localhost:27017')
+db_con = MongoClient(mongodb_uri)
 if db_con.server_info() != None :
-  mongo_db = db_con["stu2017"]
+  mongo_db = db_con[mongodb_db]
 
   core_usage = {}
   data_usage = []
